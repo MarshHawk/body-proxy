@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 services:
   envoy:
     image: envoyproxy/envoy:v1.24-latest
@@ -20,8 +19,20 @@ services:
       - "10000:10000"
     volumes:
       - ./envoy.yaml:/etc/envoy/envoy.yaml
-      - ./target/wasm32-wasi/release:/etc/envoy/proxy-wasm-plugins
+      # - ./target/wasm32-wasi/release:/etc/envoy/proxy-wasm-plugins
+      - ${WASM_PATH:-./target/wasm32-unknown-unknown/release/body_proxy.wasm}:/etc/envoy/body_proxy.wasm
     networks:
       - envoymesh
 networks:
   envoymesh: {}
+
+#  envoy:
+#    image: envoyproxy/envoy:v1.24-latest
+#    hostname: envoy
+#    ports:
+#      - "10000:10000"
+#    volumes:
+#      - ./envoy.yaml:/etc/envoy/envoy.yaml
+#      - ./target/wasm32-wasi/release:/etc/envoy/proxy-wasm-plugins
+#    networks:
+#      - envoymesh

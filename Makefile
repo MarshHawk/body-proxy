@@ -15,3 +15,10 @@ build: clean
 clean:
 	cargo clean
 	rm -rf ./pkg
+
+deploy:
+	WASM_PATH=$(WASM_PATH) docker-compose up --build --remove-orphans
+
+# shows only the logs related to WASM filter/singleton 
+deploy-filtered:
+	WASM_PATH=$(WASM_PATH) docker-compose up --build --remove-orphans | grep "\[wasm\]\|Starting"
