@@ -23,6 +23,13 @@ services:
       - ${WASM_PATH:-./target/wasm32-unknown-unknown/release/body_proxy.wasm}:/etc/envoy/body_proxy.wasm
     networks:
       - envoymesh
+
+  httpecho:
+    image: mendhak/http-https-echo
+    ports:
+      - "8080:8080"
+    networks:
+      - envoymesh
 networks:
   envoymesh: {}
 

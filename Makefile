@@ -16,7 +16,10 @@ clean:
 	cargo clean
 	rm -rf ./pkg
 
-deploy:
+down:
+	docker-compose down -v
+
+deploy: down
 	WASM_PATH=$(WASM_PATH) docker-compose up --build --remove-orphans
 
 # shows only the logs related to WASM filter/singleton 
